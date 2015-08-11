@@ -3,16 +3,28 @@ extends ../default/index.jade
 block main
   - var poe = [];
   - poe.push(['Introduction', ['Overview', 'References']]);
+  - poe.push(['hyper+json', ['Overview', 'References']]);
   - var cli = [];
   - cli.push(['Introduction', ['Overview', 'Design', 'Installation', 'References']]);
+  - cli.push(['ui', ['Overview', 'References']]);
+  - cli.push(['api', ['Overview', 'References']]);
   - var ui = [];
   - ui.push(['Introduction', ['Overview', 'Design', 'Installation', 'References']]);
+  - ui.push(['Templates', ['Overview', 'References']]);
+  - ui.push(['Styles', ['Overview', 'References']]);
+  - ui.push(['Compilation', ['Overview', 'References']]);
+  - ui.push(['Testing', ['Overview', 'References']]);
+  - ui.push(['Deploying', ['Overview', 'References']]);
+  - ui.push(['Monitoring', ['Overview', 'References']]);
   - var api = [];
   - api.push(['Introduction', ['Overview', 'Design', 'Installation', 'References']]);
+  - api.push(['Testing', ['Overview', 'References']]);
+  - api.push(['Deploying', ['Overview', 'References']]);
+  - api.push(['Monitoring', ['Overview', 'References']]);
 
   - var groups = [['poe', poe], ['poe-cli', cli], ['poe-ui', ui], ['poe-api', api]];
 
-  - function toSlug(str) { return str.toLowerCase().replace(' ', '-'); }
+  - function toSlug(str) { return str.toLowerCase().replace(' ', '-').replace('+', '-'); }
   - function guideLink(group, section, subsection) { return ('/guide/' + toSlug(group) + '/' + toSlug(section) + '/') + (subsection ? toSlug(subsection) + '/' : ''); }
 
   .Guide
