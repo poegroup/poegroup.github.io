@@ -31,19 +31,19 @@ block main
     .Guide-sidenav
       ul.Guide-sidenav-links
         each group in groups
-          li.Guide-sidenav-link
-            .Guide-sidenav-link-text
+          li.Guide-sidenav-section
+            .Guide-sidenav-section-text
               - var groupSlug = group[0].replace('poe-', '');
               - var isActive = ~locals.path.indexOf('/guide/' + groupSlug + '/');
               - var sections = group[1];
-              a.Guide-sidenav-link-anchor(href=guideLink(groupSlug, sections[0][0], sections[0][1][0])
+              a.Guide-sidenav-section-anchor(href=guideLink(groupSlug, sections[0][0], sections[0][1][0])
                                           class={'is-active': isActive})= group[0]
               if isActive
-                ul.Guide-sidenav-sublinks
+                ul.Guide-sidenav-links
                   each section in sections
-                    li.Guide-sidenav-sublink
+                    li.Guide-sidenav-link
                       - var shref = guideLink(groupSlug, section[0], section[1][0]);
-                      a.Guide-sidenav-sublink-anchor(href=shref class={'is-active': locals.path + '/' == shref})= section[0]
+                      a.Guide-sidenav-link-anchor(href=shref class={'is-active': locals.path + '/' == shref})= section[0]
 
                       ul.Guide-sidenav-sublinks
                         each subsection in section[1]

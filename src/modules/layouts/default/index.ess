@@ -1,5 +1,5 @@
 .Toolbar
-  %theme-min/skins/toolbar.ess(logo='./logo.png')
+  %theme-min/skins/toolbar/index.ess(logo='./logo.png')
 
   &-logo
     justify-content center

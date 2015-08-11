@@ -1,6 +1,28 @@
 .Guide
-  %theme-min/skins/page.ess
+  %theme-min/skins/page/index.ess
+
   &-sidenav
-    %theme-min/skins/sidenav.ess
+    %theme-min/skins/sidenav/index.ess
+
+    &-section
+      %theme-min/skins/sidenav/section.ess
+      margin-top .5rem
+
+    &-links
+      margin-top 1rem
+    &-link
+      %theme-min/skins/sidenav/link.ess
+      margin-bottom .5rem
+
+    &-sublinks
+      margin-top 0
+    &-sublink
+      %theme-min/skins/sidenav/sublink.ess
+
+    &-link,
+    &-sublink
+      &-anchor.is-active
+        color = __.color.primary.light
+
   &-content
-    %theme-min/skins/content.ess
+    %theme-min/skins/content/index.ess
