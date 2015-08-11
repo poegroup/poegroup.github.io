@@ -1,2 +1,12 @@
 .Toolbar
   %theme-min/skins/toolbar.ess(logo='./logo.png')
+
+  &-logo
+    justify-content center
+    font-weight bold
+
+    &:hover &-image
+      filter invert(0%) drop-shadow(0 0 5px hsla(0, 0%, 100%, .5))
+
+    &-image
+      filter invert(100%)

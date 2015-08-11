@@ -1,3 +1,4 @@
 body
   color = __.color.black.light
+  font-family Helvetica
   font-size = __.h5
