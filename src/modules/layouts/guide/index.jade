@@ -1,28 +1,43 @@
 extends ../default/index.jade
 
 block main
-  - var sections = [];
-  - sections.push(['Introduction', ['Overview', 'Design', 'Installation', 'References']]);
-  - sections.push(['Protocols', ['Overview', 'References']])
-  - sections.push(['Resources', ['Overview', 'Design', 'Tutorial', 'Mediatypes', 'Testing', 'References']])
-  - sections.push(['Dispatch', ['Overview', 'References']])
-  - sections.push(['Services', ['Overview', 'References']])
+  - var poe = [];
+  - poe.push(['Introduction', ['Overview', 'References']]);
+  - var cli = [];
+  - cli.push(['Introduction', ['Overview', 'Design', 'Installation', 'References']]);
+  - var ui = [];
+  - ui.push(['Introduction', ['Overview', 'Design', 'Installation', 'References']]);
+  - var api = [];
+  - api.push(['Introduction', ['Overview', 'Design', 'Installation', 'References']]);
+
+  - var groups = [['poe', poe], ['poe-cli', cli], ['poe-ui', ui], ['poe-api', api]];
+
   - function toSlug(str) { return str.toLowerCase().replace(' ', '-'); }
-  - function guideLink(section, subsection) { return '/guide/' + toSlug(section) + '/' + toSlug(subsection) + '/';}
+  - function guideLink(group, section, subsection) { return ('/guide/' + toSlug(group) + '/' + toSlug(section) + '/') + (subsection ? toSlug(subsection) + '/' : ''); }
 
   .Guide
     .Guide-sidenav
       ul.Guide-sidenav-links
-        each section in sections
+        each group in groups
           li.Guide-sidenav-link
             .Guide-sidenav-link-text
-              a.Guide-sidenav-link-anchor(href=guideLink(section[0], section[1][0])
-                                          class={'is-active': locals.path.indexOf('/guide/' + toSlug(section[0])) === 0})= section[0]
-            ul.Guide-sidenav-sublinks
-              each subsection in section[1]
-                li.Guide-sidenav-sublink
-                  - var href = guideLink(section[0], subsection);
-                  a.Guide-sidenav-sublink-anchor(href=href class={'is-active': locals.path + '/' == href})= subsection
+              - var groupSlug = group[0].replace('poe-', '');
+              - var isActive = ~locals.path.indexOf('/guide/' + groupSlug + '/');
+              - var sections = group[1];
+              a.Guide-sidenav-link-anchor(href=guideLink(groupSlug, sections[0][0], sections[0][1][0])
+                                          class={'is-active': isActive})= group[0]
+              if isActive
+                ul.Guide-sidenav-sublinks
+                  each section in sections
+                    li.Guide-sidenav-sublink
+                      - var shref = guideLink(groupSlug, section[0], section[1][0]);
+                      a.Guide-sidenav-sublink-anchor(href=shref class={'is-active': locals.path + '/' == shref})= section[0]
+
+                      ul.Guide-sidenav-sublinks
+                        each subsection in section[1]
+                          li.Guide-sidenav-sublink
+                            - var sshref = guideLink(groupSlug, section[0], subsection);
+                            a.Guide-sidenav-sublink-anchor(href=sshref class={'is-active': locals.path + '/' == sshref})= subsection
 
     .Guide-content
       a.Guide-content-edit(target='__blank' href='https://github.com/poegroup/poegroup.github.io/edit/source/' + locals.filename) Edit this page
