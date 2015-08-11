@@ -45,11 +45,12 @@ block main
                       - var shref = guideLink(groupSlug, section[0], section[1][0]);
                       a.Guide-sidenav-link-anchor(href=shref class={'is-active': locals.path + '/' == shref})= section[0]
 
-                      ul.Guide-sidenav-sublinks
-                        each subsection in section[1]
-                          li.Guide-sidenav-sublink
-                            - var sshref = guideLink(groupSlug, section[0], subsection);
-                            a.Guide-sidenav-sublink-anchor(href=sshref class={'is-active': locals.path + '/' == sshref})= subsection
+                      if ~locals.path.indexOf(guideLink(groupSlug, section[0]))
+                        ul.Guide-sidenav-sublinks
+                          each subsection in section[1]
+                            li.Guide-sidenav-sublink
+                              - var sshref = guideLink(groupSlug, section[0], subsection);
+                              a.Guide-sidenav-sublink-anchor(href=sshref class={'is-active': locals.path + '/' == sshref})= subsection
 
     .Guide-content
       a.Guide-content-edit(target='__blank' href='https://github.com/poegroup/poegroup.github.io/edit/source/' + locals.filename) Edit this page

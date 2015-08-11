@@ -1,0 +1,14 @@
+extends ../../layouts/blog/index.jade
+
+block content
+  h1 Blog
+
+  - var Path = require('path')
+  - var marked = require('marked')
+  - var posts = require.context('./', true, /^\.\/.*\.md$/).keys().sort(function(a, b) { return a > b ? -1 : 1; })
+  div
+    each post in posts
+      - var conf = require('!!json-loader!yaml-frontmatter-loader!' + post)
+      div
+        != marked((conf.__content || '').trim().split('\n').slice(0, 10).join('\n'))
+        a(href=post.replace('./', '/blog/').replace('.md', '')) READ MORE
