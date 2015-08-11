@@ -1,0 +1,37 @@
+doctype html
+html
+  - locals.description = 'poe documentation'
+  - locals.url = locals.url
+  block locals
+
+  head
+    block head
+    - var title = locals.title ? 'poegroup.github.io | ' + locals.title : 'poegroup.github.io'
+    title= title
+    meta(name='description' content=locals.description)
+    meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+
+    //- Open graph meta
+    meta(property='og:title' content=title)
+    meta(property='og:site_name' content='poegroup.github.io')
+    meta(property='og:url' content=locals.url + '/')
+    meta(property='og:description' content=locals.description)
+    meta(property='og:type' content='article')
+    meta(property='og:locale' content='en_US')
+
+    link(rel='stylesheet' href=(process.env.CDN_URL || '/') + 'main.min.css')
+    link(rel='icon' type='image/png' href='/favicon.png')
+
+  body
+    .Toolbar: .Toolbar-contents
+      a.Toolbar-logo(href='/')
+        .Toolbar-logo-image
+        .Toolbar-logo-text Mazurka
+      .Toolbar-links
+        a.Toolbar-link(href='/guide/introduction/overview') Guide
+        a.Toolbar-link(href='https://github.com/poegroup/poe') Repository
+        a.Toolbar-link(href='https://github.com/poegroup/poe/blob/master/CHANGELOG.md') Changelog
+
+    block main
+
+    script(src=(process.env.CDN_URL || '/') + 'main.min.js')

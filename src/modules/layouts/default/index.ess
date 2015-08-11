@@ -1,0 +1,2 @@
+.Toolbar
+  %theme-min/skins/toolbar.ess(logo='./logo.png')
